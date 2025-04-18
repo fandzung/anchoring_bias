@@ -24,15 +24,22 @@ if not st.session_state.submitted_info:
     st.markdown("Hãy nhập thông tin cá nhân để bắt đầu:")
 
     name = st.text_input("🔹 Nhập họ tên hoặc mã sinh viên:", key="name_input")
-    group = st.radio("🔸 Bạn thuộc nhóm nào (do giảng viên phân)?", ["Chưa chọn", "Nhóm A", "Nhóm B"], key="group_input")
+    group = st.radio("🔸 Bạn thuộc nhóm nào ?", ["Nhóm A", "Nhóm B"], key="group_input")
 
-    if st.button("🔓 Xác nhận thông tin"):
-        if name.strip() == "" or group == "Chưa chọn":
-            st.warning("⚠️ Vui lòng nhập đầy đủ thông tin và chọn nhóm trước khi tiếp tục.")
-        else:
-            st.session_state.submitted_info = True
-            st.session_state.name = name
-            st.session_state.group = group
+if "trigger_submit" not in st.session_state:
+    st.session_state.trigger_submit = False
+
+def submit_info():
+    if st.session_state.name_input.strip() == "" or st.session_state.group_input == "Chưa chọn":
+        st.warning("⚠️ Vui lòng nhập đầy đủ thông tin và chọn nhóm trước khi tiếp tục.")
+    else:
+        st.session_state.name = st.session_state.name_input
+        st.session_state.group = st.session_state.group_input
+        st.session_state.submitted_info = True
+        st.session_state.trigger_submit = True
+
+st.button("🔓 Xác nhận thông tin", on_click=submit_info)
+
 else:
     # Lấy lại thông tin từ session
     name = st.session_state.name
