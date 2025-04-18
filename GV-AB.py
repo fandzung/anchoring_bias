@@ -2,38 +2,33 @@ import streamlit as st
 import pandas as pd
 import os
 
-st.set_page_config(page_title="Xem kết quả phản hồi", layout="centered")
+st.set_page_config(page_title="Xem kết quả phản hồi", layout="wide")
 
-st.title("📋 Tổng hợp phản hồi từ sinh viên")
+st.title("📊 Tổng hợp phản hồi từ sinh viên")
 
-# Nhập mật khẩu đơn giản để hạn chế truy cập
-password = st.text_input("🔑 Nhập mã truy cập:", type="password")
+CSV_FILE = "responses.csv"
 
-if password != "ftu123":
-    st.warning("Vui lòng nhập mã truy cập hợp lệ để xem dữ liệu.")
-    st.stop()
-
-# Đọc file responses.csv
-if not os.path.exists("responses.csv"):
+# Kiểm tra file tồn tại
+if not os.path.exists(CSV_FILE):
     st.info("📭 Chưa có dữ liệu phản hồi nào được ghi nhận.")
     st.stop()
 
-# Load dữ liệu
-try:
-    df = pd.read_csv("responses.csv")
-except Exception as e:
-    st.error("Lỗi khi đọc dữ liệu: " + str(e))
-    st.stop()
+# Đọc dữ liệu
+df = pd.read_csv(CSV_FILE)
 
 # Hiển thị bảng dữ liệu
-st.subheader("📄 Danh sách phản hồi")
+st.subheader("📋 Danh sách phản hồi")
 st.dataframe(df, use_container_width=True)
 
+# Hiển thị phản hồi mới nhất
+st.markdown("### 🕒 Phản hồi gần nhất")
+st.write(df.tail(1))
+
 # Thống kê nhanh
-st.subheader("📊 Thống kê theo nhóm")
+st.subheader("📈 Thống kê theo nhóm")
 grouped = df.groupby("group")["estimated_price"].agg(["count", "mean", "min", "max"])
 st.table(grouped.style.format("{:.0f}"))
 
-# Tải file CSV
-csv = df.to_csv(index=False).encode('utf-8')
-st.download_button("⬇️ Tải toàn bộ kết quả (.csv)", csv, "responses.csv", "text/csv")
+# Nút tải về
+csv = df.to_csv(index=False).encode("utf-8")
+st.download_button("⬇️ Tải kết quả (CSV)", csv, "responses.csv", "text/csv")
