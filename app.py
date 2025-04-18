@@ -57,14 +57,17 @@ else:
     st.markdown(f"""
 **Bản tin nội bộ – Đánh giá nhanh cổ phiếu ABC**
 
-Trong bối cảnh kinh tế vĩ mô, tăng trưởng GDP quý gần nhất đạt 5.8% với lạm phát duy trì ở mức kiểm soát. Lãi suất điều hành được giữ ổn định, tạo điều kiện cho thanh khoản ngân hàng cải thiện. Nhóm ngành bán lẻ ghi nhận sức bật rõ rệt nhờ sự phục hồi tiêu dùng nội địa.
+Trong bối cảnh kinh tế vĩ mô, tăng trưởng GDP quý gần nhất đạt **5.8%** với lạm phát duy trì ở mức kiểm soát. 
+Lãi suất điều hành được giữ ổn định, tạo điều kiện cho thanh khoản ngân hàng cải thiện. 
+Nhóm ngành bán lẻ ghi nhận sức bật rõ rệt nhờ sự phục hồi tiêu dùng nội địa.
+Donald Trump tuyên bố đã hoàn thành kế hoạch MAGA vĩ đại của mình!
 
-Công ty ABC hoạt động trong ngành bán lẻ, có kết quả kinh doanh ổn định và tăng trưởng doanh thu đều đặn trong 5 năm qua. EPS dự báo năm tới đạt khoảng 5.000 VNĐ. Với mức P/E trung bình ngành là 12x, mức giá tham chiếu có thể quanh 60.000 VNĐ.
-
-Ghi nhận gần đây: {
-    "Cổ phiếu ABC vừa giảm từ 45.000 xuống còn **40.000 VNĐ** trong 1 tuần qua."
+Công ty ABC hoạt động trong ngành bán lẻ, có kết quả kinh doanh ổn định và tăng trưởng doanh thu đều đặn trong 5 năm qua. 
+EPS dự báo năm tới đạt khoảng **5.000 VNĐ**, với mức P/E trung bình ngành là **12x**.
+Gần đây, {
+    "cổ phiếu ABC vừa giảm từ **45.000** xuống còn **40.000 VNĐ** trong 1 tuần qua."
     if group == "Nhóm A" else
-    "Cổ phiếu ABC từng đạt đỉnh 90.000 VNĐ và hiện đang giao dịch quanh mức **75.000 VNĐ**."
+    "cổ phiếu ABC đã từng vươn tới đỉnh **90.000 VNĐ** và hiện đang giao dịch quanh mức **75.000 VNĐ**."
 }
     """)
 
