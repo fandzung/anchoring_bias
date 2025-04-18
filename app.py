@@ -62,9 +62,9 @@ Trong bối cảnh kinh tế vĩ mô, tăng trưởng GDP quý gần nhất đ�
 Công ty ABC hoạt động trong ngành bán lẻ, có kết quả kinh doanh ổn định và tăng trưởng doanh thu đều đặn trong 5 năm qua. EPS dự báo năm tới đạt khoảng 5.000 VNĐ. Với mức P/E trung bình ngành là 12x, mức giá tham chiếu có thể quanh 60.000 VNĐ.
 
 Ghi nhận gần đây: {
-    "Cổ phiếu ABC vừa giảm từ 45.000 xuống còn 40.000 VNĐ trong 1 tuần qua."
+    "Cổ phiếu ABC vừa giảm từ 45.000 xuống còn **40.000 VNĐ** trong 1 tuần qua."
     if group == "Nhóm A" else
-    "Cổ phiếu ABC từng đạt đỉnh 90.000 VNĐ và hiện đang giao dịch quanh mức 75.000 VNĐ."
+    "Cổ phiếu ABC từng đạt đỉnh 90.000 VNĐ và hiện đang giao dịch quanh mức **75.000 VNĐ**."
 }
     """)
 
