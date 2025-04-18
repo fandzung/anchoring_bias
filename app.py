@@ -2,17 +2,18 @@ import streamlit as st
 import pandas as pd
 import datetime
 
-# Load dữ liệu nếu có
+st.set_page_config(page_title="Anchoring Bias Game", layout="centered")
+
+# Load data nếu đã có
 def load_data():
     try:
         return pd.read_csv("responses.csv")
     except:
         return pd.DataFrame(columns=["timestamp", "name", "group", "estimated_price"])
 
-st.set_page_config(page_title="Anchoring Bias Game", layout="centered")
+# --- Bắt đầu giao diện ---
 
-# Header
-st.title("📊 Trải nghiệm AB trong phân tích cổ phiếu")
+st.title("📊 Trải nghiệm Anchoring Bias trong phân tích cổ phiếu")
 
 # Dùng session_state để lưu người dùng
 if "submitted_info" not in st.session_state:
@@ -38,29 +39,22 @@ else:
     name = st.session_state.name
     group = st.session_state.group
 
-    st.divider()
-    st.markdown("### 🧾 Thông tin thị trường và doanh nghiệp")
-
-    # Nội dung chung + ẩn bias trong dòng cuối
+    # --- Phần nội dung phân tích ---
     st.markdown(f"""
-    **Bản tin nội bộ: Đánh giá nhanh cổ phiếu ABC**
-    
-    Trong bối cảnh kinh tế vĩ mô, tăng trưởng GDP quý gần nhất đạt 5.8% với lạm phát duy trì ở mức kiểm soát. Chính sách tiền tệ tiếp tục giữ ổn định với lãi suất điều hành không đổi, góp phần cải thiện thanh khoản hệ thống ngân hàng. Nhóm ngành bán lẻ đang cho thấy đà phục hồi rõ nét nhờ nhu cầu tiêu dùng nội địa tăng mạnh sau đại dịch.
-    
-    Donald Trump tuyên bố đã hoàn thành kế hoạch bá chủ của mình, chiến dịch MAGA đã hoàn tất.
-    
-    Cổ phiếu ABC thuộc nhóm ngành bán lẻ, đã duy trì tốc độ tăng trưởng doanh thu bền vững trong 5 năm qua. 
-    
-    Dự báo EPS năm tới đạt khoảng 5.000 VNĐ. Với PE trung bình ngành khoảng 12x.
+**Bản tin nội bộ: Đánh giá nhanh cổ phiếu ABC**
 
-    Gần đây, {
-        "cổ phiếu ABC vừa giảm mạnh từ 45.000 xuống còn 40.000 VNĐ trong 1 tuần qua."
-        if group == "Nhóm A" else
-        "cổ phiếu ABC từng đạt đỉnh 90.000 VNĐ và hiện đang giao dịch quanh mức 75.000 VNĐ."
-    }
-        """)
+Trong bối cảnh kinh tế vĩ mô, tăng trưởng GDP quý gần nhất đạt 5.8% với lạm phát duy trì ở mức kiểm soát. Chính sách tiền tệ tiếp tục giữ ổn định với lãi suất điều hành không đổi, góp phần cải thiện thanh khoản hệ thống ngân hàng. Nhóm ngành bán lẻ đang cho thấy đà phục hồi rõ nét nhờ nhu cầu tiêu dùng nội địa tăng mạnh sau đại dịch.
 
-   st.divider()
+Cổ phiếu ABC thuộc nhóm ngành bán lẻ, đã duy trì tốc độ tăng trưởng doanh thu bền vững trong 5 năm qua. Dự báo EPS năm tới đạt khoảng 5.000 VNĐ. Với PE trung bình ngành khoảng 12x, mức định giá tham chiếu có thể rơi vào khoảng 60.000 VNĐ.
+
+Ghi nhận gần đây: {
+    "Cổ phiếu ABC vừa giảm mạnh từ 45.000 xuống còn 40.000 VNĐ trong 1 tuần qua."
+    if group == "Nhóm A" else
+    "Cổ phiếu ABC từng đạt đỉnh 90.000 VNĐ và hiện đang giao dịch quanh mức 75.000 VNĐ."
+}
+    """)
+
+    st.divider()
     st.markdown("### 💵 Theo bạn, mức giá hợp lý hiện tại của cổ phiếu ABC là bao nhiêu?")
 
     estimated_price = st.number_input("💬 Nhập giá bạn định giá (VNĐ):", min_value=0)
