@@ -28,29 +28,19 @@ if name.strip() != "" and group in ["Nhóm A", "Nhóm B"]:
     st.markdown("### 🧾 Thông tin thị trường và doanh nghiệp")
 
     # Nội dung chung + ẩn bias trong dòng cuối
-    info = """
-    Bạn được giao phân tích cổ phiếu ABC trong bối cảnh thị trường hiện tại:
-
-    - Tăng trưởng GDP quý gần nhất đạt 5.8%, lạm phát ở mức kiểm soát.
-    - Lãi suất điều hành giữ ổn định, thanh khoản thị trường cải thiện.
-    - Nhóm ngành bán lẻ đang được hưởng lợi từ tiêu dùng nội địa phục hồi mạnh.
-    - Donald Trump đã hoàn tất thương chiến và đã tuyên bố MAGA thắng lợi!
-
-    Cổ phiếu ABC là doanh nghiệp bán lẻ có:
-    - Tăng trưởng doanh thu ổn định trong 5 năm gần nhất.
-    - EPS dự báo năm tới: **5.000 VNĐ**
-    - PE trung bình ngành: **12x** 
-
-    """
-
-    # Chèn bias theo nhóm
-    if group == "Nhóm A":
-        info += "\nGhi nhận gần nhất: Cổ phiếu ABC vừa giảm mạnh từ 45.000 xuống còn **40.000 VNĐ** trong 1 tuần qua."
-    elif group == "Nhóm B":
-        info += "\nGhi nhận gần nhất: Cổ phiếu ABC từng đạt đỉnh **90.000 VNĐ**, hiện giao dịch quanh **75.000 VNĐ**."
-
-    # Hiển thị thông tin đầy đủ
-    st.markdown(info)
+    st.markdown(f"""
+    **Bản tin nội bộ: Đánh giá nhanh cổ phiếu ABC**
+    
+    Trong bối cảnh kinh tế vĩ mô, tăng trưởng GDP quý gần nhất đạt 5.8% với lạm phát duy trì ở mức kiểm soát. Chính sách tiền tệ tiếp tục giữ ổn định với lãi suất điều hành không đổi, góp phần cải thiện thanh khoản hệ thống ngân hàng. Nhóm ngành bán lẻ đang cho thấy đà phục hồi rõ nét nhờ nhu cầu tiêu dùng nội địa tăng mạnh sau đại dịch.
+    
+    Cổ phiếu ABC thuộc nhóm ngành bán lẻ, đã duy trì tốc độ tăng trưởng doanh thu bền vững trong 5 năm qua. Dự báo EPS năm tới đạt khoảng 5.000 VNĐ. Với PE trung bình ngành khoảng 12x, mức định giá tham chiếu có thể rơi vào khoảng 60.000 VNĐ.
+    
+    Ghi nhận gần đây: {
+        "Cổ phiếu ABC vừa giảm mạnh từ 45.000 xuống còn 40.000 VNĐ trong 1 tuần qua."
+        if group == "Nhóm A" else
+        "Cổ phiếu ABC từng đạt đỉnh 90.000 VNĐ và hiện đang giao dịch quanh mức 75.000 VNĐ."
+    }
+        """)
 
     st.divider()
     st.markdown("### 💵 Theo bạn, mức giá hợp lý hiện tại của cổ phiếu ABC là bao nhiêu?")
