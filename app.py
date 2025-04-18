@@ -1,19 +1,14 @@
 import streamlit as st
 import pandas as pd
 import datetime
-import gspread
-from google.oauth2.service_account import Credentials
+import os
 
 st.set_page_config(page_title="Anchoring Bias Game", layout="centered")
 
-# Google Sheets setup
-SHEET_NAME = "AB_Responses"
-SCOPE = ["https://www.googleapis.com/auth/spreadsheets"]
-CREDS = Credentials.from_service_account_file("credentials.json", scopes=SCOPE)
-client = gspread.authorize(CREDS)
-sheet = client.open(SHEET_NAME).sheet1
+# File CSV để lưu phản hồi
+CSV_FILE = "responses.csv"
 
-# ----------- Session State mặc định ------------
+# Khởi tạo session
 if "submitted" not in st.session_state:
     st.session_state.submitted = False
 if "name" not in st.session_state:
@@ -21,19 +16,27 @@ if "name" not in st.session_state:
 if "group" not in st.session_state:
     st.session_state.group = ""
 
-# ----------- Hàm lưu dữ liệu -------------
-def save_to_google_sheets(name, group, estimated_price):
-    timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    sheet.append_row([timestamp, name, group, estimated_price])
+# Hàm lưu dữ liệu
+def save_response(name, group, estimated_price):
+    try:
+        df = pd.read_csv(CSV_FILE)
+    except:
+        df = pd.DataFrame(columns=["timestamp", "name", "group", "estimated_price"])
 
-# ----------- Giao diện ----------------
+    new_row = pd.DataFrame([{
+        "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "name": name,
+        "group": group,
+        "estimated_price": estimated_price
+    }])
+    df = pd.concat([df, new_row], ignore_index=True)
+    df.to_csv(CSV_FILE, index=False)
 
+# Giao diện app
 st.title("\U0001F4CA Trải nghiệm Anchoring Bias trong định giá cổ phiếu")
 
-# BƯỚC 1: NHẬP THÔNG TIN
 if not st.session_state.submitted:
     st.markdown("### \U0001F4DD Vui lòng nhập thông tin để bắt đầu:")
-
     name = st.text_input("\U0001F539 Họ tên hoặc mã sinh viên", key="name_input")
     group = st.radio("\U0001F538 Nhóm bạn được phân công", ["Chưa chọn", "Nhóm A", "Nhóm B"], key="group_input")
 
@@ -45,9 +48,8 @@ if not st.session_state.submitted:
             st.session_state.group = st.session_state.group_input
             st.session_state.submitted = True
 
-    st.button("\U0001F513 Xác nhận thông tin", on_click=submit_info)
+    st.button("🔓 Xác nhận thông tin", on_click=submit_info)
 
-# BƯỚC 2: HIỂN THỊ THÔNG TIN PHÂN TÍCH + Ô NHẬP GIÁ
 else:
     name = st.session_state.name
     group = st.session_state.group
@@ -72,5 +74,5 @@ Ghi nhận gần đây: {
     estimated_price = st.number_input("\U0001F4B5 Nhập mức giá bạn định giá (VNĐ):", min_value=0)
 
     if st.button("✅ Gửi phản hồi"):
-        save_to_google_sheets(name, group, estimated_price)
-        st.success("✅ Phản hồi của bạn đã được ghi nhận. Cảm ơn bạn!")
+        save_response(name, group, estimated_price)
+        st.success("✅ Phản hồi của bạn đã được ghi nhận! Cảm ơn bạn.")
