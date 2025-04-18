@@ -41,7 +41,7 @@ if mode == "Sinh viên":
     if not st.session_state.submitted:
         st.markdown("### \U0001F4DD Vui lòng nhập thông tin để bắt đầu:")
         name = st.text_input("\U0001F539 Họ tên hoặc mã sinh viên", key="name_input")
-        group = st.radio("\U0001F538 Nhóm bạn được phân công", ["Chưa chọn", "Nhóm A", "Nhóm B"], key="group_input")
+        group = st.radio("\U0001F538 Nhóm bạn được phân công", ["Nhóm A", "Nhóm B"], key="group_input")
 
         def submit_info():
             if st.session_state.name_input.strip() == "" or st.session_state.group_input == "Chưa chọn":
@@ -63,6 +63,8 @@ if mode == "Sinh viên":
 Trong bối cảnh kinh tế vĩ mô, tăng trưởng GDP quý gần nhất đạt **5.8%** với lạm phát duy trì ở mức kiểm soát. 
 
 **Lãi suất** điều hành được giữ ổn định, tạo điều kiện cho thanh khoản ngân hàng cải thiện. 
+
+Donald Trump tuyên bố đã hoàn tất sứ mệnh MAGA vĩ đại của mình!
 
 Nhóm ngành bán lẻ ghi nhận sức bật rõ rệt nhờ sự **phục hồi** tiêu dùng nội địa.
 
