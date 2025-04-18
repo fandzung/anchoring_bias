@@ -69,4 +69,4 @@ if name.strip() != "" and group in ["Nhóm A", "Nhóm B"]:
         df.to_csv("responses.csv", index=False)
         st.success("✅ Gửi thành công! Cảm ơn bạn đã tham gia.")
 else:
-    st.info("📝 Vui lòng nhập đầy đủ thông tin trước khi xem bài phân tích.")
+    st.info("📝 Vui lòng nhập đầy đủ thông tin trước khi xem thông tin phục vụ phân tích.")
