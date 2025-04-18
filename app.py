@@ -60,7 +60,7 @@ else:
     }
         """)
 
-    st.divider()
+   st.divider()
     st.markdown("### 💵 Theo bạn, mức giá hợp lý hiện tại của cổ phiếu ABC là bao nhiêu?")
 
     estimated_price = st.number_input("💬 Nhập giá bạn định giá (VNĐ):", min_value=0)
@@ -76,5 +76,3 @@ else:
         df = pd.concat([df, new_row], ignore_index=True)
         df.to_csv("responses.csv", index=False)
         st.success("✅ Gửi thành công! Cảm ơn bạn đã tham gia.")
-else:
-    st.info("📝 Vui lòng nhập đầy đủ thông tin trước khi xem thông tin phục vụ phân tích.")
