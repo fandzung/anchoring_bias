@@ -19,7 +19,7 @@ st.markdown("Hãy nhập thông tin cá nhân và lựa chọn của bạn để
 name = st.text_input("🔹 Nhập họ tên hoặc mã sinh viên:")
 
 # Bước 2: Chọn nhóm
-group = st.radio("🔸 Bạn thuộc nhóm nào (do giảng viên phân)?", ["Chưa chọn", "Nhóm A", "Nhóm B"])
+group = st.radio("🔸 Bạn được phân vào nhóm nào?", ["Nhóm A", "Nhóm B"])
 
 # Chỉ tiếp tục nếu đã nhập tên và chọn nhóm hợp lệ
 if name.strip() != "" and group in ["Nhóm A", "Nhóm B"]:
