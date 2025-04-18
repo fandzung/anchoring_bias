@@ -33,14 +33,16 @@ if name.strip() != "" and group in ["Nhóm A", "Nhóm B"]:
     
     Trong bối cảnh kinh tế vĩ mô, tăng trưởng GDP quý gần nhất đạt 5.8% với lạm phát duy trì ở mức kiểm soát. Chính sách tiền tệ tiếp tục giữ ổn định với lãi suất điều hành không đổi, góp phần cải thiện thanh khoản hệ thống ngân hàng. Nhóm ngành bán lẻ đang cho thấy đà phục hồi rõ nét nhờ nhu cầu tiêu dùng nội địa tăng mạnh sau đại dịch.
     
-    Cổ phiếu ABC thuộc nhóm ngành bán lẻ, đã duy trì tốc độ tăng trưởng doanh thu bền vững trong 5 năm qua. Dự báo EPS năm tới đạt khoảng 5.000 VNĐ. Với PE trung bình ngành khoảng 12x.
-
     Donald Trump tuyên bố đã hoàn thành kế hoạch bá chủ của mình, chiến dịch MAGA đã hoàn tất.
     
-    Ghi nhận gần đây: {
-        "Cổ phiếu ABC vừa giảm mạnh từ 45.000 xuống còn 40.000 VNĐ trong 1 tuần qua."
+    Cổ phiếu ABC thuộc nhóm ngành bán lẻ, đã duy trì tốc độ tăng trưởng doanh thu bền vững trong 5 năm qua. 
+    
+    Dự báo EPS năm tới đạt khoảng 5.000 VNĐ. Với PE trung bình ngành khoảng 12x.
+
+    Gần đây, {
+        "cổ phiếu ABC vừa giảm mạnh từ 45.000 xuống còn 40.000 VNĐ trong 1 tuần qua."
         if group == "Nhóm A" else
-        "Cổ phiếu ABC từng đạt đỉnh 90.000 VNĐ và hiện đang giao dịch quanh mức 75.000 VNĐ."
+        "cổ phiếu ABC từng đạt đỉnh 90.000 VNĐ và hiện đang giao dịch quanh mức 75.000 VNĐ."
     }
         """)
 
