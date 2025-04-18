@@ -33,7 +33,6 @@ if not st.session_state.submitted_info:
             st.session_state.submitted_info = True
             st.session_state.name = name
             st.session_state.group = group
-            st.experimental_rerun()  # Refresh giao diện
 else:
     # Lấy lại thông tin từ session
     name = st.session_state.name
