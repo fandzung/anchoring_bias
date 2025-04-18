@@ -13,16 +13,30 @@ st.set_page_config(page_title="Anchoring Bias Game", layout="centered")
 
 # Header
 st.title("📊 Trải nghiệm AB trong phân tích cổ phiếu")
-st.markdown("Hãy nhập thông tin cá nhân và lựa chọn của bạn để bắt đầu:")
 
-# Bước 1: Nhập thông tin cá nhân
-name = st.text_input("🔹 Nhập họ tên hoặc mã sinh viên:")
+# Dùng session_state để lưu người dùng
+if "submitted_info" not in st.session_state:
+    st.session_state.submitted_info = False
 
-# Bước 2: Chọn nhóm
-group = st.radio("🔸 Bạn được phân vào nhóm nào?", ["Nhóm A", "Nhóm B"])
+# Chỉ hiển thị phần nhập nếu chưa submit
+if not st.session_state.submitted_info:
+    st.markdown("Hãy nhập thông tin cá nhân để bắt đầu:")
 
-# Chỉ tiếp tục nếu đã nhập tên và chọn nhóm hợp lệ
-if name.strip() != "" and group in ["Nhóm A", "Nhóm B"]:
+    name = st.text_input("🔹 Nhập họ tên hoặc mã sinh viên:", key="name_input")
+    group = st.radio("🔸 Bạn thuộc nhóm nào (do giảng viên phân)?", ["Chưa chọn", "Nhóm A", "Nhóm B"], key="group_input")
+
+    if st.button("🔓 Xác nhận thông tin"):
+        if name.strip() == "" or group == "Chưa chọn":
+            st.warning("⚠️ Vui lòng nhập đầy đủ thông tin và chọn nhóm trước khi tiếp tục.")
+        else:
+            st.session_state.submitted_info = True
+            st.session_state.name = name
+            st.session_state.group = group
+            st.experimental_rerun()  # Refresh giao diện
+else:
+    # Lấy lại thông tin từ session
+    name = st.session_state.name
+    group = st.session_state.group
 
     st.divider()
     st.markdown("### 🧾 Thông tin thị trường và doanh nghiệp")
