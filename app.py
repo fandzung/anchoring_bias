@@ -80,7 +80,7 @@ Tin mới cập nhật: {
         """)
 
         st.markdown("---")
-        st.markdown("### \U0001F4AC Bạn đánh giá giá hợp lý hiện tại của cổ phiếu ABC là bao nhiêu?")
+        st.markdown("### \U0001F4AC Theo bạn, **giá hợp lý** hiện tại của cổ phiếu ABC là bao nhiêu?")
 
         estimated_price = st.number_input("\U0001F4B5 Nhập mức giá bạn định giá (VNĐ):", min_value=0)
 
