@@ -2,59 +2,32 @@ import streamlit as st
 import pandas as pd
 import datetime
 
-# Tạo/đọc file kết quả
+# Đọc dữ liệu nếu có
 def load_data():
     try:
         return pd.read_csv("responses.csv")
     except:
         return pd.DataFrame(columns=["timestamp", "name", "group", "estimated_price"])
 
-# Giao diện người dùng
+# Giao diện
 st.title("📊 Trải nghiệm Anchoring Bias trong đầu tư cổ phiếu")
 
-st.markdown("""
-Bạn là chuyên viên phân tích, hãy đọc thông tin và đưa ra mức giá hợp lý cho cổ phiếu ABC.
+# 1. Chọn nhóm trước
+group = st.radio("🔰 Bạn thuộc nhóm nào?", ["Nhóm A", "Nhóm B"])
 
----  
-**Thông tin tài chính giống nhau với mọi người:**
+# 2. Hiện toàn bộ thông tin sau khi chọn nhóm
+st.markdown("### 🧾 Thông tin thị trường cổ phiếu ABC")
 
-- EPS dự báo: 5.000 VNĐ  
-- PE ngành: 12 → Giá hợp lý ước lượng: 60.000 VNĐ  
-- Tăng trưởng ổn định, không có tin xấu  
----
-""")
+with st.expander("📂 Bối cảnh thị trường"):
+    st.markdown("""
+    - Công ty có nền tảng tài chính ổn định.
+    - EPS dự báo năm tới: **5.000 VNĐ**
+    - Tỷ lệ tăng trưởng duy trì ổn định, không có rủi ro lớn.
+    - PE ngành: **12x** → Giá hợp lý ước tính: **60.000 VNĐ**
+    """)
 
-group = st.radio("Bạn thuộc nhóm nào?", ["Nhóm A", "Nhóm B"])
-
+# 3. Giá neo (đưa ra sau cùng)
 if group == "Nhóm A":
-    st.warning("Cổ phiếu ABC vừa giảm từ 45.000 xuống 40.000 VNĐ trong 1 tuần qua.")
+    st.warning("📉 Cổ phiếu ABC vừa giảm từ 45.000 xuống còn 40.000 VNĐ trong tuần qua.")
 else:
-    st.success("Cổ phiếu ABC đã từng đạt đỉnh 90.000 VNĐ, nay đang ở mức 75.000 VNĐ.")
-
-name = st.text_input("Họ tên (hoặc mã sinh viên)")
-estimated_price = st.number_input("Theo bạn, giá hợp lý hiện tại là bao nhiêu (VNĐ)?", min_value=0)
-
-if st.button("✅ Gửi phản hồi"):
-    if name == "":
-        st.error("Bạn cần nhập họ tên.")
-    else:
-        df = load_data()
-        new_data = pd.DataFrame([{
-            "timestamp": datetime.datetime.now(),
-            "name": name,
-            "group": group,
-            "estimated_price": estimated_price
-        }])
-        df = pd.concat([df, new_data], ignore_index=True)
-        df.to_csv("responses.csv", index=False)
-        st.success("Gửi thành công!")
-
-# Hiển thị kết quả nếu giảng viên muốn xem
-st.markdown("## 📈 Tổng hợp (dành cho giảng viên)")
-if st.checkbox("Hiện kết quả"):
-    df = load_data()
-    if df.empty:
-        st.info("Chưa có phản hồi nào.")
-    else:
-        st.dataframe(df)
-        st.bar_chart(df.groupby("group")["estimated_price"].mean())
+    st.success("📈 Cổ phiếu ABC từng đạt đỉnh 90
